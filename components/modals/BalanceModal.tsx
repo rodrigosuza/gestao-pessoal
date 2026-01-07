@@ -64,7 +64,7 @@ const BalanceModal: React.FC<BalanceModalProps> = ({ currentBalance, onClose, on
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
       `}</style>
-      
+
       <div className="flex justify-start items-center p-4 h-[80px] flex-shrink-0">
         <button
           onClick={handleClose}
@@ -74,7 +74,7 @@ const BalanceModal: React.FC<BalanceModalProps> = ({ currentBalance, onClose, on
           <XIcon className="w-7 h-7" />
         </button>
       </div>
-      
+
       <div className="flex-grow flex flex-col items-center text-center w-full px-4 overflow-y-auto no-scrollbar">
         <div className="w-full max-w-sm py-4">
           <FixxLogo />
@@ -85,7 +85,7 @@ const BalanceModal: React.FC<BalanceModalProps> = ({ currentBalance, onClose, on
             <div className="space-y-2 w-3/4 mx-auto">
               <div className="relative w-full">
                 <span className="absolute left-4 top-1/2 -translate-y-1/2 text-base font-semibold text-gray-400">R$</span>
-                <input 
+                <input
                   type="text"
                   value={balanceInput}
                   onChange={handleInputChange}
@@ -96,11 +96,11 @@ const BalanceModal: React.FC<BalanceModalProps> = ({ currentBalance, onClose, on
                   inputMode="decimal"
                 />
               </div>
-            
+
               <p className="text-[11px] text-gray-400">*Valor informado acima será salvo para os próximos meses</p>
 
               <div className="flex justify-center pt-1">
-                <button 
+                <button
                   onClick={handleSave}
                   className="bg-[#3BCE66] text-white font-bold py-2 w-full rounded-lg hover:bg-[#32A955] transition-all hover:scale-105 active:scale-95"
                 >
@@ -110,18 +110,18 @@ const BalanceModal: React.FC<BalanceModalProps> = ({ currentBalance, onClose, on
             </div>
           </div>
           <div className="mt-4 w-3/4 mx-auto">
-             <button
-               onClick={onOpenCofre}
-               className="bg-gray-700 text-white font-bold py-3 w-full rounded-lg hover:bg-gray-800 transition-all hover:scale-105 active:scale-95"
-             >
-               <span>Cofre pessoal</span>
-             </button>
+            <button
+              onClick={onOpenCofre}
+              className="bg-gray-700 text-white font-bold py-3 w-full rounded-lg hover:bg-gray-800 transition-all hover:scale-105 active:scale-95"
+            >
+              <span>Cofre pessoal</span>
+            </button>
           </div>
         </div>
       </div>
       <div className="flex-shrink-0 py-8">
         <div className="text-center text-xs text-gray-400 mb-2">
-          <p>Versão 1.1.0</p>
+          <p>Versão 1.11.1</p>
         </div>
         <div className="text-gray-500 text-sm text-center space-y-1">
           <p>Criado por Rodrigo Souza</p>
