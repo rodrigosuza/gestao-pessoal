@@ -3,6 +3,8 @@ const CACHE_NAME = 'fixx-gestao-pessoal-v11';
 const URLS_TO_CACHE = [
   '/',
   '/index.html',
+  '/manifest.json',
+  '/icon-512.png',
   '/icon.svg',
   'https://cdn.tailwindcss.com'
 ];
@@ -25,7 +27,7 @@ self.addEventListener('fetch', event => {
   if (event.request.method !== 'GET') {
     return;
   }
-  
+
   event.respondWith(
     caches.match(event.request)
       .then(response => {
@@ -34,13 +36,18 @@ self.addEventListener('fetch', event => {
           return response;
         }
 
+        // For navigation requests, fall back to index.html
+        if (event.request.mode === 'navigate') {
+          return caches.match('/index.html');
+        }
+
         // Clone the request because it's a stream and can only be consumed once.
         const fetchRequest = event.request.clone();
 
         return fetch(fetchRequest).then(
           response => {
             // Check if we received a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic' && response.type !== 'cors') {
+            if (!response || response.status !== 200 || (response.type !== 'basic' && response.type !== 'cors')) {
               return response;
             }
             
