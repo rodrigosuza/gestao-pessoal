@@ -1,0 +1,18 @@
+
+{
+  "short_name": "Fixx",
+  "name": "Gestão Pessoal Fixx",
+  "description": "A web-based personal finance manager to track your monthly expenses and manage your balance.",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "192x192 512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#3BCE66",
+  "background_color": "#ffffff"
+}

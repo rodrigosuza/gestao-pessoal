@@ -1,0 +1,5 @@
+{
+  "name": "Gestão Pessoal Fixx",
+  "description": "A web-based personal finance manager to track your monthly expenses and manage your balance, inspired by the Fixx desktop application. It helps you keep an eye on your spending with an intuitive, mobile-first interface.",
+  "requestFramePermissions": []
+}
