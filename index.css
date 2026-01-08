@@ -4,7 +4,8 @@
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-touch-callout: none; /* Disables the callout menu on long press */
+  -webkit-touch-callout: none;
+  /* Disables the callout menu on long press */
 }
 
 /* Re-enable selection for inputs and text areas */
@@ -16,10 +17,29 @@ textarea {
   user-select: text;
 }
 
-/* Prevent zooming behavior on touch */
+/* Prevent zooming behavior on touch and lock body scroll */
 html,
 body,
 #root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  /* Lock global scroll */
+  position: fixed;
+  /* Prevent rubber banding */
   touch-action: pan-x pan-y;
-  overscroll-behavior-y: none; /* Optional: prevents pull-to-refresh if not needed */
+  -webkit-text-size-adjust: 100%;
+  overscroll-behavior-y: none;
+}
+
+/* Utilities to hide scrollbars but keep functionality */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  /* IE and Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }

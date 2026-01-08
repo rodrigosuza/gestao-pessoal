@@ -6,13 +6,13 @@ import { CheckboxCheckedIcon } from './icons/CheckboxCheckedIcon';
 import { CheckboxUncheckedIcon } from './icons/CheckboxUncheckedIcon';
 
 interface ExpenseItemProps {
-  expense: Expense;
-  currentDate: Date;
-  onEdit: (expense: Expense) => void;
-  onDelete: (expense: Expense) => void;
-  onTogglePaidStatus: (expenseId: string) => void;
-  isPastMonth: boolean;
-  index: number;
+    expense: Expense;
+    currentDate: Date;
+    onEdit: (expense: Expense) => void;
+    onDelete: (expense: Expense) => void;
+    onTogglePaidStatus: (expenseId: string) => void;
+    isPastMonth: boolean;
+    index: number;
 }
 
 const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit, onDelete, onTogglePaidStatus, isPastMonth, index }) => {
@@ -28,7 +28,7 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
     const getTranslateX = (element: HTMLElement): number => {
         const style = window.getComputedStyle(element);
         const transform = style.transform;
-        
+
         if (transform === 'none' || !transform) return 0;
 
         // Try standard DOMMatrix
@@ -65,7 +65,7 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
         }
         setTranslateX(0);
         if (callback) {
-            setTimeout(callback, 300); 
+            setTimeout(callback, 300);
         }
     };
 
@@ -95,10 +95,10 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
     const handleDragEnd = (clientX: number) => {
         if (!isDragging.current) return;
         isDragging.current = false;
-        
+
         if (itemRef.current) {
             itemRef.current.style.transition = 'transform 0.3s cubic-bezier(0.25, 0.1, 0.25, 1)';
-            
+
             const currentTranslateX = getTranslateX(itemRef.current);
 
             if (Math.abs(currentTranslateX) > SWIPE_THRESHOLD) {
@@ -111,14 +111,14 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
             }
         }
     };
-    
+
     const onMouseDown = (e: MouseEvent<HTMLDivElement>) => handleDragStart(e.clientX);
     const onMouseMove = (e: MouseEvent<HTMLDivElement>) => handleDragMove(e.clientX);
     const onMouseUp = (e: MouseEvent<HTMLDivElement>) => handleDragEnd(e.clientX);
     const onMouseLeave = (e: MouseEvent<HTMLDivElement>) => {
         if (isDragging.current) handleDragEnd(e.clientX);
     }
-    
+
     const onTouchStart = (e: TouchEvent<HTMLDivElement>) => handleDragStart(e.touches[0].clientX);
     const onTouchMove = (e: TouchEvent<HTMLDivElement>) => handleDragMove(e.touches[0].clientX);
     const onTouchEnd = (e: TouchEvent<HTMLDivElement>) => handleDragEnd(e.changedTouches[0].clientX);
@@ -129,21 +129,21 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
     };
 
     return (
-        <div 
+        <div
             className="relative h-[70px] my-2 bg-white border border-gray-200 rounded-lg overflow-hidden animate-list-item"
             style={{ animationDelay: `${index * 50}ms` }}
         >
             {/* Action Buttons Container */}
             <div className="absolute inset-0 flex justify-between items-center">
-                <button 
-                    onClick={handleEditClick} 
+                <button
+                    onClick={handleEditClick}
                     className="bg-[#4CD964] text-white font-bold h-full w-[115px] flex items-center justify-center"
                     aria-label="Editar"
                 >
                     Editar
                 </button>
-                <button 
-                    onClick={handleDeleteClick} 
+                <button
+                    onClick={handleDeleteClick}
                     className="bg-[#FF3B30] text-white font-bold h-full w-[115px] flex items-center justify-center"
                     aria-label="Apagar"
                 >
@@ -163,7 +163,7 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
                 onTouchMove={onTouchMove}
                 onTouchEnd={onTouchEnd}
             >
-                 <div
+                <div
                     className={`relative flex-shrink-0 mr-4 w-8 h-8 ${isPastMonth ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'}`}
                     onClick={handleTogglePaid}
                 >
@@ -189,50 +189,42 @@ const ExpenseItem: React.FC<ExpenseItemProps> = ({ expense, currentDate, onEdit,
 };
 
 interface ExpenseListProps {
-  expenses: Expense[];
-  currentDate: Date;
-  onEdit: (expense: Expense) => void;
-  onDelete: (expense: Expense) => void;
-  onTogglePaidStatus: (expenseId: string) => void;
-  isPastMonth: boolean;
+    expenses: Expense[];
+    currentDate: Date;
+    onEdit: (expense: Expense) => void;
+    onDelete: (expense: Expense) => void;
+    onTogglePaidStatus: (expenseId: string) => void;
+    isPastMonth: boolean;
 }
 
 const ExpenseList: React.FC<ExpenseListProps> = ({ expenses, currentDate, onEdit, onDelete, onTogglePaidStatus, isPastMonth }) => {
-  if (expenses.length === 0) {
-    return (
-      <div className="flex-grow flex items-center justify-center text-gray-400 p-4">
-        Nenhuma Despesa
-      </div>
-    );
-  }
+    if (expenses.length === 0) {
+        return (
+            <div className="flex-grow flex items-center justify-center text-gray-400 p-4">
+                Nenhuma Despesa
+            </div>
+        );
+    }
 
-  return (
-    <>
-        <style>{`
-            .no-scrollbar::-webkit-scrollbar {
-                display: none;
-            }
-            .no-scrollbar {
-                -ms-overflow-style: none;
-                scrollbar-width: none;
-            }
-        `}</style>
-        <div className="flex-grow overflow-y-auto px-2 pb-2 no-scrollbar">
-            {expenses.map((expense, index) => (
-                <ExpenseItem 
-                    key={expense.id} 
-                    expense={expense} 
-                    currentDate={currentDate} 
-                    onEdit={onEdit} 
-                    onDelete={onDelete} 
-                    onTogglePaidStatus={onTogglePaidStatus} 
-                    isPastMonth={isPastMonth} 
-                    index={index}
-                />
-            ))}
-        </div>
-    </>
-  );
+    return (
+        <>
+
+            <div className="flex-grow overflow-y-auto px-2 pb-2 no-scrollbar">
+                {expenses.map((expense, index) => (
+                    <ExpenseItem
+                        key={expense.id}
+                        expense={expense}
+                        currentDate={currentDate}
+                        onEdit={onEdit}
+                        onDelete={onDelete}
+                        onTogglePaidStatus={onTogglePaidStatus}
+                        isPastMonth={isPastMonth}
+                        index={index}
+                    />
+                ))}
+            </div>
+        </>
+    );
 };
 
 export default ExpenseList;
