@@ -6,11 +6,15 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
+build_log.txt
 
 node_modules
 dist
 dist-ssr
 *.local
+
+# Platforms
+android/
 
 # Editor directories and files
 .vscode/*
